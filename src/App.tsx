@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Container } from '@mui/material';
+import { useSelector, RootState } from './redux/store';
+import Routes from './routes'
+import Header from './components/Header';
+import Loader from './components/Loader';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const { showPreloader } = useSelector((state: RootState) => state.preloader);
+  
+  return <>
+    <Header />
+    <Container sx={{ mb: 5 }}>
+      <Routes />
+      {showPreloader && <Loader />}
+    </Container>
+  </>
+
 }
 
 export default App;
